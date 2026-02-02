@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>QuickCart | E-commerce</title>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="logo">QuickCart</div>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for products, brands and more" onkeyup="searchProducts()">
+        <button>🔍</button>
+    </div>
+    <div class="nav-links">
+        <button onclick="showSection('home')">Home</button>
+        <button onclick="showSection('profile')">My Profile</button>
+        <div class="cart-btn" onclick="toggleCart()">
+            🛒 Cart <span id="cart-count">0</span>
+        </div>
+    </div>
+</nav>
+
+<section id="home-section">
+    <div class="hero-banner">
+        <h2>Big Billion Days are Live!</h2>
+        <p>Up to 80% Off on Electronics</p>
+    </div>
+    <div id="product-grid"></div>
+</section>
+
+<section id="profile-section" class="hidden">
+    <div class="profile-container">
+        <div class="sidebar">
+    <button onclick="showProfileTab('orders')">My Orders</button>
+    <button onclick="showProfileTab('wishlist')">My Wishlist ❤️</button>
+    <button onclick="showProfileTab('settings')">Account Settings</button>
+    <button onclick="logout()">Logout</button>
+</div>
+
+
+        <div class="content" id="profile-content">
+            <h3>Welcome, User!</h3>
+            <p>Select an option from the left to manage your account.</p>
+        </div>
+    </div>
+</section>
+
+    <main id="product-grid">
+        </main>
+
+    <div id="cart-sidebar" class="hidden">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <hr>
+        <p>Total: $<span id="cart-total">0</span></p>
+        <button onclick="checkout()">Checkout</button>
+        <button onclick="toggleCart()">Close</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
