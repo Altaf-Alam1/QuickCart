@@ -427,3 +427,69 @@ function completeOrder(method){
   closePayment();
   alert("Payment Successful!");
 }
+
+// Check if user is already logged in on page load
+window.onload = function() {
+    const loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(loggedInUser) {
+        updateAuthUI(loggedInUser.name);
+    }
+}
+
+function toggleAuth(type) {
+    if(type === 'reg') {
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('reg-form').classList.remove('hidden');
+        document.getElementById('auth-title').innerText = "Looks like you're new here!";
+    } else {
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('reg-form').classList.add('hidden');
+        document.getElementById('auth-title').innerText = "Login";
+    }
+}
+
+function handleRegister() {
+    const name = document.getElementById('reg-name').value;
+    const email = document.getElementById('reg-email').value;
+    const pass = document.getElementById('reg-pass').value;
+
+    if(!name || !email || !pass) return alert("All fields required!");
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    if(users.find(u => u.email === email)) return alert("Email already registered!");
+
+    users.push({name, email, pass});
+    localStorage.setItem('users', JSON.stringify(users));
+    alert("Registration Successful! Please Login.");
+    toggleAuth('login');
+}
+
+function handleLogin() {
+    const email = document.getElementById('login-email').value;
+    const pass = document.getElementById('login-pass').value;
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(u => u.email === email && u.pass === pass);
+
+    if(user) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        updateAuthUI(user.name);
+        closeAuthModal();
+    } else {
+        alert("Invalid Credentials!");
+    }
+}
+
+function updateAuthUI(name) {
+    document.getElementById('user-display').innerText = `Hi, ${name}`;
+    document.getElementById('auth-btn').innerText = "Logout";
+    document.getElementById('auth-btn').onclick = logout;
+}
+
+function logout() {
+    localStorage.removeItem('currentUser');
+    location.reload(); // Refresh to reset UI
+}
+
+function openAuthModal() { document.getElementById('auth-overlay').classList.remove('hidden'); }
+function closeAuthModal() { document.getElementById('auth-overlay').classList.add('hidden'); }
