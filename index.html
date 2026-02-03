@@ -18,6 +18,36 @@
             🛒 Cart <span id="cart-count">0</span>
         </div>
     </div>
+    <div class="nav-links">
+    <span id="user-display"></span>
+    <button id="auth-btn" onclick="openAuthModal()">Login</button>
+    </div>
+
+<div id="auth-overlay" class="hidden overlay">
+    <div class="auth-modal">
+        <div class="auth-left">
+            <h2 id="auth-title">Login</h2>
+            <p id="auth-desc">Get access to your Orders, Wishlist and Recommendations</p>
+            <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/login_img_c4a81e.png" width="150">
+        </div>
+        <div class="auth-right">
+            <div id="login-form">
+                <input type="email" id="login-email" placeholder="Enter Email">
+                <input type="password" id="login-pass" placeholder="Enter Password">
+                <button class="btn-orange" onclick="handleLogin()">Login</button>
+                <p>New to ShopEase? <span class="link" onclick="toggleAuth('reg')">Create an account</span></p>
+            </div>
+            <div id="reg-form" class="hidden">
+                <input type="text" id="reg-name" placeholder="Full Name">
+                <input type="email" id="reg-email" placeholder="Email Address">
+                <input type="password" id="reg-pass" placeholder="Set Password">
+                <button class="btn-orange" onclick="handleRegister()">Continue</button>
+                <p>Existing User? <span class="link" onclick="toggleAuth('login')">Log in</span></p>
+            </div>
+            <button class="close-btn" onclick="closeAuthModal()">✕</button>
+        </div>
+    </div>
+</div>
 </nav>
 
 <section id="home-section">
